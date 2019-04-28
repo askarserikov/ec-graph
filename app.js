@@ -28,18 +28,28 @@ app.post('/response', function (req, res) {
   // console.log("Q6: " + req.body.Q6);
   var ip = req.ip || "";
 
-  db.collection("responses").insertOne({
-    "ip": ip,
-    "age": req.body.age,
-    "sex": req.body.sex,
-    "Q1": req.body.Q1,
-    "Q2": req.body.Q2,
-    "Q3": req.body.Q3,
-    "Q4": req.body.Q4,
-    "Q5": req.body.Q5,
-    "Q6": req.body.Q6
-  });
-  res.send("Received");
+  if (req.body.age) {
+    db.collection("responses").insertOne({
+      "ip": ip,
+      "age": req.body.age,
+      "sex": req.body.sex,
+      "Q1": req.body.Q1,
+      "Q2": req.body.Q2,
+      "Q3": req.body.Q3,
+      "Q4": req.body.Q4,
+      "Q5": req.body.Q5,
+      "Q6": req.body.Q6,
+      "Q7": req.body.Q7,
+      "Q8": req.body.Q8,
+      "Q9": req.body.Q9,
+      "Q10": req.body.Q10
+    });
+    res.send("Done");
+  } else {
+    res.send("Wrong data");
+  }
+
+
 });
 
 app.listen(port, function() { console.log(`Example app listening on port ${port}!`) });
