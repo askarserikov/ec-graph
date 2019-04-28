@@ -74,12 +74,14 @@
         <button class="pure-button pure-button-primary" id="finish-btn">Submit</button>
     </div>
     <div id="chart-info" class="pure-u-1">
-        <div class="pure-u-18-24" id="ci-title"><h3 id="ci-text">Graph questions explanation</h3></div>
-        <div class="pure-u-18-24" id="ci-container"></div>
+        <div class="pure-u-18-24" id="ci-title"><h1 id="ci-text">Graph questions instruction</h1></div>
         <div id="ci-nav-bar" class="pure-u-1-2">
             In the next 5 questions, you will observe 5 graphs
-            illustrating energy consumption patterns of a household over 24 hours. You can see an example graph above.
+            illustrating energy consumption patterns of a household over 24 hours. You can see an <b>example</b> graph below.
             <br><br>
+        </div>
+        <div class="pure-u-18-24" id="ci-container"></div>
+        <div class="pure-u-1-2">
             The values on the horizontal (X) axis represent time of the day. The leftmost
             value <b>0</b> refers to midnight (00:00 in the 24-hour clock system) and the rightmost <b>23</b>
             refers to 23:00 or 11pm.<br><br>
@@ -92,17 +94,19 @@
         </div>
     </div>
     <div id="circle-info" class="pure-u-1">
-        <div class="pure-u-18-24" id="cr-title"><h3 id="cr-text">Circle questions explanation</h3></div>
+        <div class="pure-u-18-24" id="cr-title"><h1 id="cr-text">Circle questions instruction</h1></div>
+        <div id="cr-nav-bar" class="pure-u-1-2">
+            In the next 5 questions, you will observe 5 circles
+            illustrating energy consumption patterns of a household over 24 hours. You can see an <b>example</b> circle above.
+            <br><br>
+        </div>
         <div class="pure-u-18-24" id="cr-circle-div">
             <div class="circle"></div>
         </div>
-        <div id="cr-nav-bar" class="pure-u-1-2">
-            In the next 5 questions, you will observe 5 circles
-            illustrating energy consumption patterns of a household over 24 hours. You can see an example circle above.
-            <br><br>
+        <div class="pure-u-1-2">
             The value in the middle of the circle shows time of the day in the 24-hour clock system.
             <br><br>
-            The color of the circle indicates the deviation from the optimal energy consumption level:
+            The color of the circle indicates the deviation from the optimal energy consumption level at the given time:
             <ul>
                 <li><b style="color: #FF0000">Red</b> means the energy consumption is significantly higher than optimal</li>
                 <li><b style="color: #FF430B">Orange</b> means the energy consumption is higher than optimal</li>
@@ -110,7 +114,7 @@
                 <li><b style="color: #67B304">Light Green</b> means the energy consumption is lower than optimal</li>
                 <li><b style="color: #1E9600">Green</b> means the energy consumption is significantly lower than optimal</li>
             </ul>
-            <br><br>
+            <br>
             <b>We ask you to observe the energy consumption patterns and evaluate them in terms of energy efficiency
                 on a scale from 1 (very inefficient) to 5 (very efficient).</b>
             <br><br>
@@ -471,7 +475,7 @@
           clearInterval(IntervalId);
           $("#next-btn").attr("disabled", false);
         }
-      }, updateInterval);
+      }, updateInterval+250);
     }
 
     function render_test_circle() {
@@ -509,7 +513,7 @@
         if (j == values[question].length) {
           clearInterval(IntervalId);
         }
-      }, updateInterval);
+      }, updateInterval+250);
 
     }
 
