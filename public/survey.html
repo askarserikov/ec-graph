@@ -145,7 +145,7 @@
   $(function() {
 
     var ticks_number = -24,
-      updateInterval = 500,
+      updateInterval = 100,
 
       test_values = [
         [1.93, 2.15, 2.94, 2.47, 2.17, 2.04, 1.78, 1.74, 1.75, 1.82, 1.92, 2.13,
@@ -440,6 +440,7 @@
 
     function render_circle(){
       $("#next-btn").attr("disabled", true);
+      $("#main-circle").css("pointer-events", 'none');
       var j = 0;
       var IntervalId = setInterval(function () {
         var actual = values[question-5][j];
@@ -474,11 +475,13 @@
         if (j == values[question].length) {
           clearInterval(IntervalId);
           $("#next-btn").attr("disabled", false);
+          $("#main-circle").css("pointer-events", 'auto');
         }
       }, updateInterval+250);
     }
 
     function render_test_circle() {
+      $("#cr-ok-btn").attr("disabled", true);
       var j = 0;
       var IntervalId = setInterval(function () {
         var actual = test_values[1][j];
@@ -511,6 +514,7 @@
 
         j = j + 1;
         if (j == values[question].length) {
+          $("#cr-ok-btn").attr("disabled", false);
           clearInterval(IntervalId);
         }
       }, updateInterval+250);
