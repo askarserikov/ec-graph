@@ -101,6 +101,7 @@ body {
 #container,
 #ci-container,
 #cr-circle {
+    display: none;
     min-width: 50%;
     height: 400px;
     margin: 10px auto;
@@ -154,6 +155,7 @@ body {
 
 #pane {
     text-align: center;
+    padding-bottom: 20px;
 }
 
 body, html {

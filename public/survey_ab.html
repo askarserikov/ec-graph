@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Real-time Energy Consumption</title>
     <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
@@ -11,24 +13,21 @@
 <script src="rangeslider.min.js"></script>
 <div id="pane" class="pure-g">
     <div id="welcome-msg" class="pure-u-1-3">
-        <p id="welcome-text">Hello and Welcome!</p>
+        <h1 id="welcome-text">Hello and Welcome!</h1>
         First of all, thank you for you participation!
         <br>
-        The survey will take less than 5 minutes.
+        The survey will take less than 3 minutes of your time.
         <br><br>
-        The goal of this survey is to understand how data visualization can affect people's perception of residential
+        The goal of this survey is to understand how data visualization affects people's perception of residential
         energy consumption.
         <br><br>
-        The survey consists of two sections:
-        <br>
-        I. 5 questions with data presented in graphs<br>
-        II. 5 questions with data presented in colored circles
-        <br><br>
-        Before each section you will be shown a brief instruction.<br><br>
-        <b>Note</b> that all data patterns you will observe are different.
-        <br><br>
-        If you have any questions you can contact the authors of this survey via email: <a href="mailto:askar.serikov@student.lut.fi">askar.serikov@student.lut.fi</a>
-        <br><hr>
+        The survey consists of <b>5 questions</b>.<br>
+        You will see a brief instruction before the actual questions start.<br><br>
+        <b>We ask you to keep in mind:</b><br>
+        - All data patterns you will observe are different so you do not need to compare them with each other;<br>
+        - We encourage you not to think too much on the answers: your perception of <b>visual</b> information is what important to us.<br>
+        <p style="color: gray">If you have any questions you can contact the authors of this survey via email: <a href="mailto:askar.serikov@student.lut.fi">askar.serikov@student.lut.fi</a></p>
+        <hr>
         The survey is completely anonymous but we would like you to indicate your age group and sex for research purposes
         <br><br>
         <div id="welcome-form-wrapper">
@@ -85,10 +84,18 @@
             The values on the horizontal (X) axis represent time of the day. The leftmost
             value <b>0</b> refers to midnight (00:00 in the 24-hour clock system) and the rightmost <b>23</b>
             refers to 23:00 or 11pm.<br><br>
-            The vertical (Y) axis is for Kilowatt Hours (kWh). It represents active energy consumption for
-            the given hours. The actual values are purposefully hidden from the graph.<br><br>
-            <b>We ask you to observe the energy consumption patterns and evaluate them in terms of energy efficiency
-                on a scale from 1 (very inefficient) to 5 (very efficient).</b>
+            The values on the vertical (Y) axis represent active energy consumption for
+            the given hours in Kilowatt Hours (kWh).<br><br>
+            <b>We ask you to observe the energy consumption patterns and evaluate them in terms of energy conservation*
+                on a scale from 1 to 5:</b><br>
+            Select <b>1</b> if you think that the energy consumption pattern reflects an <b>excessive</b> use of energy;<br>
+            <b>...</b><br>
+            Select <b>5</b> if you think that the energy consumption pattern reflects a <b>moderate</b> use of energy.
+            <br><br>
+            <b>Important!</b> Do not compare kWh values of different patterns to each other, they are not related!<br>
+            Evaluate each graph separately.<br>
+            <br>
+            <i style="font-size: 10pt">*Energy conservation is an effort made to reduce the consumption of energy by using less of an energy service.</i>
             <br><br>
             <button id="ci-ok-btn" class="pure-button pure-button-primary">OK</button>
         </div>
@@ -106,17 +113,22 @@
         <div class="pure-u-1-2">
             The value in the middle of the circle shows time of the day in the 24-hour clock system.
             <br><br>
-            The color of the circle indicates the deviation from the optimal energy consumption level at the given time:
+            The color of the circle indicates the deviation from the expected energy consumption level at the given time:
             <ul>
-                <li><b style="color: #FF0000">Red</b> means the energy consumption is significantly higher than optimal</li>
-                <li><b style="color: #FF430B">Orange</b> means the energy consumption is higher than optimal</li>
-                <li><b style="color: #FFF200">Yellow</b> means the energy consumption is within the optimal range</li>
-                <li><b style="color: #67B304">Light Green</b> means the energy consumption is lower than optimal</li>
-                <li><b style="color: #1E9600">Green</b> means the energy consumption is significantly lower than optimal</li>
+                <li><b style="color: #FF0000">Red</b> means the energy consumption is significantly higher than expected</li>
+                <li><b style="color: #FF430B">Orange</b> means the energy consumption is higher than expected</li>
+                <li><b style="color: #FFF200">Yellow</b> means the energy consumption is within the expected range</li>
+                <li><b style="color: #67B304">Light Green</b> means the energy consumption is lower than expected</li>
+                <li><b style="color: #1E9600">Green</b> means the energy consumption is significantly lower than expected</li>
             </ul>
             <br>
-            <b>We ask you to observe the energy consumption patterns and evaluate them in terms of energy efficiency
-                on a scale from 1 (very inefficient) to 5 (very efficient).</b>
+            <b>We ask you to observe the energy consumption patterns and evaluate them in terms of energy conservation*
+                on a scale from 1 to 5:</b><br>
+            Select <b>1</b> if you think that the energy consumption pattern reflects an <b>excessive</b> use of energy;<br>
+            <b>...</b><br>
+            Select <b>5</b> if you think that the energy consumption pattern reflects a <b>moderate</b> use of energy.
+            <br><br>
+            <i style="font-size: 10pt">*Energy conservation is an effort made to reduce the consumption of energy by using less of an energy service.</i>
             <br><br>
             <button id="cr-ok-btn" class="pure-button pure-button-primary">OK</button>
         </div>
@@ -127,11 +139,11 @@
         <div class="pure-u-18-24" id="circle-div">
             <div id="main-circle" class="circle"></div>
             <br>
-            <i>Click or tap the circle to replay the pattern</i>
+            <i style="font-size: 10pt">Click or tap the circle to replay the pattern</i>
         </div>
         <div id="nav-bar" class="pure-u-1">
             Evaluate the energy consumption pattern on a scale from 1 to 5<br>
-            Where 1 - very inefficient and 5 - very efficient<br>
+            Where <b>1 — excessive use of energy</b> and <b>5 — moderate use of energy</b><br>
             <form id="options" class="pure-form">
                 <h2 id="slider-value">1</h2>
                 <input type="range" class="slider" min="1" max="5" value="1" id="slider" oninput="slider_update()" style="margin-bottom: 1em">
@@ -146,6 +158,7 @@
 
     var ticks_number = -24,
       updateInterval = 500,
+      coin,
 
       test_values = [
         [1.93, 2.15, 2.94, 2.47, 2.17, 2.04, 1.78, 1.74, 1.75, 1.82, 1.92, 2.13,
@@ -185,7 +198,7 @@
         [1.0550658, 1.3501303, 1.1187567, 1.0346017, 1.0181652, 1.0591236,
           1.2901689, 1.2925715, 1.5269339, 1.2092066, 1.1108791, 1.346024 ,
           1.2608874, 1.204397 , 1.2608585, 1.1074979, 0.9938548, 0.7703088,
-          0.895992 , 1.0072787, 1.1989686, 1.1378539, 1.1322845, 1.8702364],
+          0.895992 , 1.0072787, 1.1989686, 1.1378539, 1.1322845, 1.1702364],
 
         [2.271282 , 2.6193545, 2.6381369, 2.434347 , 2.4632728, 2.5982292,
           2.703333 , 2.8180144, 2.490032 , 2.533498 , 2.4752178, 2.4384282,
@@ -207,14 +220,26 @@
 
     $('#welcome-form').submit(function(e) {
       e.preventDefault();
-      var coin = Math.floor(2 * Math.random()) % 2 == 0;
+      //coin = Math.floor(2 * Math.random()) % 2 == 0;
+      coin = false;
+      console.log(coin);
       // get all the inputs into an array.
       var inputs = $('#welcome-form :input');
       responses["age"] = inputs[0]['value'];
       responses["sex"] = inputs[1]['value'];
       $("#welcome-msg").remove();
-      $("#chart-info").css('display', 'block');
-      render_test_chart();
+      if (coin) {
+        responses["type"] = "chart";
+        $("#chart-info").css('display', 'block');
+        $("#ci-container").css('display', 'block');
+        render_test_chart();
+      }
+      else {
+        responses["type"] = "circle";
+        $("#circle-info").css('display', 'block');
+        $("#cr-circle-div").css('display', 'block');
+        render_test_circle();
+      }
     });
 
     $("#main-circle").click(function () {
@@ -224,12 +249,14 @@
     $("#ci-ok-btn").click(function () {
       $("#chart-info").remove();
       $("#main").css('display', 'block');
+      $("#container").css('display', 'block');
       render_chart();
     });
 
     $("#cr-ok-btn").click(function () {
       $("#circle-info").remove();
       $("#main").css('display', 'block');
+      $("#container").remove();
       $("#circle-div").css('display', 'block');
       render_circle();
     });
@@ -257,32 +284,20 @@
       uncheck_rb();
       question += 1;
       $("#main-title-text").text("Question " + (question+1));
-      switch (question) {
-        case 1:
-        case 2:
-        case 3:
-        case 4:
+
+      if (question != 5) {
+        if (coin) {
           render_chart();
-          break;
-        case 5:
-          $("#container").remove();
-          $("#main").css('display', 'none');
-          $("#circle-info").css('display', 'block');
-          $("#cr-circle-div").css('display', 'block');
-          render_test_circle();
-          break;
-        case 6:
-        case 7:
-        case 8:
-        case 9:
+        }
+        else {
           render_circle();
-          break;
-        case 10:
-          $("#main").remove();
-          $("#finish-msg").css('display', 'block');
-          break;
-        default:
+        }
       }
+      else {
+        $("#main").remove();
+        $("#finish-msg").css('display', 'block');
+      }
+
     });
 
     function render_chart() {
@@ -325,7 +340,7 @@
             text: 'kWh'
           },
           labels: {
-            enabled: false
+            enabled: true
           },
           plotLines: [{
             value: 0,
@@ -334,8 +349,8 @@
           }]
         },
         tooltip: {
-          headerFormat: '<b>{series.name}</b><br/>',
-          pointFormat: ''
+          headerFormat: '<b>{series.name} at {point.x}:00:</b><br/>',
+          pointFormat: '{point.y:.2f} kWh'
         },
         legend: {
           enabled: false
@@ -364,6 +379,17 @@
     }
 
     function render_test_chart() {
+      Highcharts.setOptions({
+        chart: {
+          style: {
+            fontFamily: 'Helvetica, sans-serif'
+          }
+        },
+        credits: {
+          enabled: false
+        }
+      });
+
       Highcharts.chart('ci-container', {
         chart: {
           type: 'line',
@@ -401,7 +427,7 @@
             text: 'kWh'
           },
           labels: {
-            enabled: false
+            enabled: true
           },
           plotLines: [{
             value: 0,
@@ -410,8 +436,8 @@
           }]
         },
         tooltip: {
-          headerFormat: '<b>{series.name}</b><br/>',
-          pointFormat: ''
+          headerFormat: '<b>{series.name} at {point.x}:00:</b><br/>',
+          pointFormat: '{point.y:.2f} kWh'
         },
         legend: {
           enabled: false
@@ -423,7 +449,6 @@
           name: 'Energy consumption',
           color: '#003c8f',
           data: (function () {
-            // generate an array of random data
             var data = [], i;
 
             for (i = ticks_number; i <= 0; i += 1) {
@@ -444,8 +469,8 @@
       $("#main-circle").css("pointer-events", 'none');
       var j = 0;
       var IntervalId = setInterval(function () {
-        var actual = values[question-5][j];
-        var predicted = values[question][j];
+        var actual = values[question][j];
+        var predicted = values[question+5][j];
 
         if (predicted * 0.9 <= actual && predicted * 1.1 > actual) {
           $(".circle").css('background-color', '#FFF200')
@@ -532,7 +557,7 @@
 
   function slider_update() {
     $("#slider-value").text($("#slider").val());
-  };
+  }
 
 </script>
 </body>

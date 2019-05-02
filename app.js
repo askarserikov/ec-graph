@@ -20,6 +20,8 @@ app.get('/chart', function (req, res)  { res.sendFile('public/chart.html', {root
 
 app.get('/survey', function (req, res) { res.sendFile('public/survey.html', {root: __dirname}) });
 
+app.get('/survey_ab', function (req, res) { res.sendFile('public/survey_ab.html', {root: __dirname}) });
+
 app.post('/response', function (req, res) {
   //console.log(req.body);
   // console.log("Age: " + req.body.age);
@@ -28,7 +30,21 @@ app.post('/response', function (req, res) {
   // console.log("Q6: " + req.body.Q6);
   var ip = req.ip || "";
 
-  if (req.body.age) {
+  if (req.body.type) {
+    db.collection("responses").insertOne({
+      "ip": ip,
+      "type": req.body.type,
+      "age": req.body.age,
+      "sex": req.body.sex,
+      "Q1": req.body.Q1,
+      "Q2": req.body.Q2,
+      "Q3": req.body.Q3,
+      "Q4": req.body.Q4,
+      "Q5": req.body.Q5
+    });
+    res.send("Done");
+  }
+  else if (req.body.Q10) {
     db.collection("responses").insertOne({
       "ip": ip,
       "age": req.body.age,
