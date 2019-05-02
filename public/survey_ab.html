@@ -220,14 +220,14 @@
 
     $('#welcome-form').submit(function(e) {
       e.preventDefault();
-      //coin = Math.floor(2 * Math.random()) % 2 == 0;
-      coin = false;
-      console.log(coin);
-      // get all the inputs into an array.
+      coin = Math.floor(2 * Math.random()) % 2 == 0;
+
       var inputs = $('#welcome-form :input');
       responses["age"] = inputs[0]['value'];
       responses["sex"] = inputs[1]['value'];
+
       $("#welcome-msg").remove();
+      
       if (coin) {
         responses["type"] = "chart";
         $("#chart-info").css('display', 'block');
