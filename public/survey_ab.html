@@ -24,7 +24,7 @@
         The survey consists of <b>5 questions</b>.<br>
         You will see a brief instruction before the actual questions start.<br><br>
         <b>We ask you to keep in mind:</b><br>
-        - All data patterns you will observe are different so you do not need to compare them with each other;<br>
+        - All data patterns you will observe are not related to each other and you do not need to compare them;<br>
         - We encourage you not to think too much on the answers: your perception of <b>visual</b> information is what important to us.<br>
         <p style="color: gray">If you have any questions you can contact the authors of this survey via email: <a href="mailto:askar.serikov@student.lut.fi">askar.serikov@student.lut.fi</a></p>
         <hr>
@@ -73,7 +73,7 @@
         <button class="pure-button pure-button-primary" id="finish-btn">Submit</button>
     </div>
     <div id="chart-info" class="pure-u-1">
-        <div class="pure-u-18-24" id="ci-title"><h1 id="ci-text">Graph questions instruction</h1></div>
+        <div class="pure-u-18-24" id="ci-title"><h1 id="ci-text">Instruction</h1></div>
         <div id="ci-nav-bar" class="pure-u-1-2">
             In the next 5 questions, you will observe 5 graphs
             illustrating energy consumption patterns of a household over 24 hours. You can see an <b>example</b> graph below.
@@ -85,7 +85,8 @@
             value <b>0</b> refers to midnight (00:00 in the 24-hour clock system) and the rightmost <b>23</b>
             refers to 23:00 or 11pm.<br><br>
             The values on the vertical (Y) axis represent active energy consumption for
-            the given hours in Kilowatt Hours (kWh).<br><br>
+            the given hours in Kilowatt Hours (kWh).<br>
+            <hr>
             <b>We ask you to observe the energy consumption patterns and evaluate them in terms of energy conservation*
                 on a scale from 1 to 5:</b><br>
             Select <b>1</b> if you think that the energy consumption pattern reflects an <b>excessive</b> use of energy;<br>
@@ -101,7 +102,7 @@
         </div>
     </div>
     <div id="circle-info" class="pure-u-1">
-        <div class="pure-u-18-24" id="cr-title"><h1 id="cr-text">Circle questions instruction</h1></div>
+        <div class="pure-u-18-24" id="cr-title"><h1 id="cr-text">Instruction</h1></div>
         <div id="cr-nav-bar" class="pure-u-1-2">
             In the next 5 questions, you will observe 5 circles
             illustrating energy consumption patterns of a household over 24 hours. You can see an <b>example</b> circle below.
@@ -113,15 +114,13 @@
         <div class="pure-u-1-2">
             The value in the middle of the circle shows time of the day in the 24-hour clock system.
             <br><br>
-            The color of the circle indicates the deviation from the expected energy consumption level at the given time:
-            <ul>
-                <li><b style="color: #FF0000">Red</b> means the energy consumption is significantly higher than expected</li>
-                <li><b style="color: #FF430B">Orange</b> means the energy consumption is higher than expected</li>
-                <li><b style="color: #FFF200">Yellow</b> means the energy consumption is within the expected range</li>
-                <li><b style="color: #67B304">Light Green</b> means the energy consumption is lower than expected</li>
-                <li><b style="color: #1E9600">Green</b> means the energy consumption is significantly lower than expected</li>
-            </ul>
-            <br>
+            The color of the circle indicates the deviation from the expected energy consumption level at the given time:<br>
+            <b style="color: #FF0000">Red</b> means the energy consumption is <b>significantly higher</b> than expected<br>
+            <b style="color: #FF9E0F">Orange</b> means the energy consumption is <b>higher</b> than expected<br>
+            <b style="color: #FFF200">Yellow</b> means the energy consumption is <b>within the expected range</b><br>
+            <b style="color: #67B304">Light Green</b> means the energy consumption is <b>lower</b> than expected<br>
+            <b style="color: #1E9600">Green</b> means the energy consumption is <b>significantly lower</b> than expected<br>
+            <hr>
             <b>We ask you to observe the energy consumption patterns and evaluate them in terms of energy conservation*
                 on a scale from 1 to 5:</b><br>
             Select <b>1</b> if you think that the energy consumption pattern reflects an <b>excessive</b> use of energy;<br>
@@ -227,7 +226,7 @@
       responses["sex"] = inputs[1]['value'];
 
       $("#welcome-msg").remove();
-      
+
       if (coin) {
         responses["type"] = "chart";
         $("#chart-info").css('display', 'block');
@@ -476,15 +475,11 @@
           $(".circle").css('background-color', '#FFF200')
             .text(j + ":00");
         }
-        else if (predicted * 1.1 <= actual && predicted * 1.25 > actual) {
+        else if (predicted * 1.1 <= actual && predicted * 1.3 > actual) {
           $(".circle").css('background-color', '#FF9E0F')
             .text(j + ":00");
         }
-        else if (predicted * 1.25 <= actual && actual < predicted * 1.5) {
-          $(".circle").css('background-color', '#FF430B')
-            .text(j + ":00");
-        }
-        else if (predicted * 1.5 <= actual) {
+        else if (predicted * 1.3 <= actual) {
           $(".circle").css('background-color', '#FF0000')
             .text(j + ":00");
         }
