@@ -29,7 +29,7 @@
     </table>
 </div>
 <script>
-  $.get( "http://localhost:3000/responses_json", function( data ) {
+  $.get( "/responses_json", function( data ) {
     $.each(data, function( index, entry ) {
       $("#responses-body").append(
         "<tr>"+
