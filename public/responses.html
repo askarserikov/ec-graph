@@ -31,8 +31,14 @@
 <script>
   $.get( "/responses_json", function( data ) {
     $.each(data, function( index, entry ) {
+      var tr = "";
+      if (index % 2 == 0) {
+        tr = "<tr class='pure-table-odd'>"
+      } else {
+        tr = "<tr>"
+      }
       $("#responses-body").append(
-        "<tr>"+
+        tr +
           "<td>" + (index + 1) + "</td>" +
           "<td>" + entry["ip"] + "</td>" +
           "<td>" + entry["sex"] + "</td>" +
