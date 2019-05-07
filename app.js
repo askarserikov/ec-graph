@@ -7,11 +7,13 @@ app.use(express.static('public'));
 app.use(express.json());
 
 var db;
+var collection;
 var mongo_client = require('mongodb').MongoClient;
 
 mongo_client.connect('mongodb://localhost:27017/survey', function (err, client) {
   if (err) throw err;
   db = client.db('survey');
+  collection = db.collection("responses");
 });
 
 app.get('/', function (req, res) { res.sendFile('public/index.html', {root: __dirname}) });
@@ -21,6 +23,21 @@ app.get('/chart', function (req, res)  { res.sendFile('public/chart.html', {root
 app.get('/survey', function (req, res) { res.sendFile('public/survey.html', {root: __dirname}) });
 
 app.get('/survey_ab', function (req, res) { res.sendFile('public/survey_ab.html', {root: __dirname}) });
+
+app.get('/responses', function (req, res) { res.sendFile('public/responses.html', {root: __dirname}) });
+
+app.get('/responses_json', function (req, res) {
+
+    collection.find().toArray(function (err, result) {
+      console.log("result: ");
+      console.log(result);
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
+    })
+});
 
 app.post('/response', function (req, res) {
   //console.log(req.body);

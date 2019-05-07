@@ -118,7 +118,7 @@
             <b style="color: #FF0000">Red</b> means the energy consumption is <b>significantly higher</b> than expected<br>
             <b style="color: #FF9E0F">Orange</b> means the energy consumption is <b>higher</b> than expected<br>
             <b style="color: #FFF200">Yellow</b> means the energy consumption is <b>within the expected range</b><br>
-            <b style="color: #67B304">Light Green</b> means the energy consumption is <b>lower</b> than expected<br>
+            <b style="color: #A0CB02">Light Green</b> means the energy consumption is <b>lower</b> than expected<br>
             <b style="color: #1E9600">Green</b> means the energy consumption is <b>significantly lower</b> than expected<br>
             <hr>
             <b>We ask you to observe the energy consumption patterns and evaluate them in terms of energy conservation*
@@ -484,7 +484,7 @@
             .text(j + ":00");
         }
         else if (predicted * 0.75 <= actual && predicted * 0.9 > actual) {
-          $(".circle").css('background-color', '#67B304')
+          $(".circle").css('background-color', '#A0CB02')
             .text(j + ":00");
         }
         else if (actual < predicted * 0.75) {

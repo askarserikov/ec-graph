@@ -40,6 +40,10 @@ body {
  * and Firefox.
  * Correct `block` display not defined for `main` in IE 11.
  */
+#responses-wrapper {
+    text-align: center;
+}
+
 .slidecontainer {
     width: 100%; /* Width of the outside container */
 }
