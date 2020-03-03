@@ -1,0 +1,7 @@
+- Install node (https://nodejs.org/en/)
+- Using Terminal navigate to the root directory of the app.
+- In Terminal, run: npm install
+- After all the necessary node modules will be installed, in Terminal run: node app.js
+- In your browser navigate to localhost:3000
+- public/index.html contains useful comments on how you can customize the app to fit your use case
+- Good luck!

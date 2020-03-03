@@ -102,6 +102,14 @@ body {
     text-align: center;
 }
 
+#container-p {
+    display: block;
+    min-width: 50%;
+    height: 400px;
+    margin: 10px auto;
+}
+
+
 #container,
 #ci-container,
 #cr-circle {

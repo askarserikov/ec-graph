@@ -24,65 +24,77 @@
         <input type="checkbox" name="microwave" value="1"> Microwave Oven<br>
         <input type="checkbox" name="refrigerator" value="0.15" checked disabled> Refrigerator<br>
         <input type="checkbox" name="router" value="0.01" checked disabled> WiFi Router<br>
+        <button class="pure-button pure-button-primary" id="plus-button">+</button>
     </div>
-    <div class="pure-u-18-24" id="container"></div>
-    <div class="pure-u-18-24" style="text-align: center">
-        <div class="circle"></div>
-    </div>
+    <div class="pure-u-18-24" id="container-p"></div>
 </div>
 <script>
-  var a = -50;
-  var initial_consumption = 0.16;
-  var total_consumption = initial_consumption;
-  var updateInterval = 2000;
-  var max_consumption = 20.64;
-  var min_consumption = 0;
-  var median_consumption = max_consumption/2;
-  var r = 0;
-  var g = 0;
+  //Hi, this is a very simple app that was a part of a Master Thesis. It can be
+  //used to visualize energy consumption over 24 hours. All unnecessary parts
+  //were stripped off the app so you only have a graph that uses Highcharts.js framework.
+  //All the customization is done via Highscharts' API which can be found at https://api.highcharts.com/highcharts/
 
-  $(":checkbox").click(function () {
-    total_consumption = 0;
-    $(':checkbox:checked').each(function(i){
-      total_consumption = total_consumption + parseFloat($(this).val());
+  //The list of checkboxes you can see above was purposefully left here so you can
+  //add more functionality to the app by using it in conjuction with the button below.
+
+  //The button does not do much in the demo but can be used as an example how
+  //you can add dynamically change the graph. Here you can see that the button adds
+  //a new series to the chart called Sauna with values for 0,1,2 hours, respectively.
+  //In order to apply the changes, the redraw() method is called.
+  //One possible scenario is extracting value of checked list items upon pressing
+  //the button and updating the chart accordingly
+  $("#plus-button").click(function () {
+    mychart.addSeries({
+      name: 'Sauna',
+      color: '#003c8f',
+      data: [0, 2, 6]
     });
-    circle();
+    mychart.redraw();
   });
 
-
-  function circle(){
-    if (total_consumption < median_consumption) {
-      g = 255;
-      r = parseInt(255 / (median_consumption/total_consumption));
-    } else if (total_consumption > median_consumption) {
-      r = 255;
-      g = 255 - parseInt((total_consumption/max_consumption) * 255);
-    } else {
-      r = 255;
-      g = 255;
-    }
-    $(".circle").css('background-color', 'rgb(' + r + ', ' + g + ', 0)');
-    $(".circle").text(total_consumption.toFixed(1) + " kWh");
-  }
-
-
-  Highcharts.chart('container', {
+  //The main chart. It resides in a HTML block called 'container-p'.
+  //Here we are creating an instance of the chart. Refer to Highcharts API on what
+  //parameters like column or plotOptions do and how they can be leveraged in your
+  //use case
+  mychart = Highcharts.chart('container-p', {
     chart: {
-      type: 'spline',
+      type: 'column',
       animation: Highcharts.svg, // don't animate in old IE
       marginRight: 10,
       events: {
-        load: function () {
+        //This commented function is not used in this demo.
+        //It has been left here as an example so, if needed, you can implement dynamic updating
+        //of the chart. This function adds a new time point (x-axis) every updateInterval
+        //which is set to 2000 ms (see line 35)
 
-          // set up the updating of the chart each second
-          var series = this.series[0];
-          setInterval(function () {
-            var x = (new Date()).getTime(), // current time
-              y = total_consumption;
-            series.addPoint([x, y], true, true);
-          }, updateInterval);
-        }
+        // load: function () {
+        //
+        //   // set up the updating of the chart each second
+        //   var series = this.series[0];
+        //   setInterval(function () {
+        //     var x = (new Date()).getTime(), // current time
+        //       y = total_consumption;
+        //     series.addPoint({}, true, true);
+        //   }, updateInterval);
+        // }
       }
+    },
+
+    column: {
+      pointPadding: 0,
+      borderWidth: 0,
+      groupPadding: 0,
+      shadow: false
+    },
+
+    plotOptions: {
+        column: {
+          stacking: 'normal',
+          color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+        },
+        series: {
+          pointWidth: 30
+        }
     },
 
     time: {
@@ -93,22 +105,48 @@
       text: 'Real-time Energy Consumption'
     },
     xAxis: {
-      type: 'datetime',
-      tickPixelInterval: 150
+      type: 'linear',
+      tickInterval: 1
     },
     yAxis: {
       title: {
         text: 'kWh'
       },
+      stackLabels: {
+        enabled: true,
+        style: {
+          fontWeight: 'bold',
+          color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+        }
+      },
       plotLines: [{
-        value: 0,
-        width: 1,
-        color: '#003c8f'
-      }]
+        value: 3,
+        color: 'green',
+        width: 2
+      }, {
+        value: 7,
+        color: 'red',
+        width: 2
+      }],
+      plotBands: [{
+        color: '#8BC34A66',
+        from: 0,
+        to: 3
+      }, {
+        color: '#FFEB3B66',
+        from: 3,
+        to: 7
+      },
+        {
+          color: '#F4433666',
+          from: 7,
+          to: 10
+      }
+      ]
     },
     tooltip: {
       headerFormat: '<b>{series.name}</b><br/>',
-      pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.2f}'
+      pointFormat: '{point.y:.2f} kWh'
     },
     legend: {
       enabled: false
@@ -116,24 +154,46 @@
     exporting: {
       enabled: false
     },
-    series: [{
-      name: 'Energy consumption',
-      color: '#003c8f',
-      data: (function () {
-        // generate an array of random data
-        var data = [],
-          time = (new Date()).getTime(),
-          i;
-
-        for (i = a; i <= 0; i += 1) {
-          data.push({
-            x: time + i * updateInterval,
-            y: initial_consumption
-          });
-        }
-        return data;
-      }())
-    }]
+    //This list contains all the appliances. Each has its name, color, and data.
+    //Where data is represented as an array of double/float values, each of them
+    //stands for an hour in 24 hours. Hence, each array consists of 24 values.
+    //As per given state of the app, you can modify the values here manually and
+    //observe the results by restarting the app. If you wish, you can add dynamic
+    //changes to the graph by using some of the examples in this code or by referring
+    //to Highcharts API.
+    series: [
+      {
+        name: 'Dishwasher',
+        color: '#607D8B',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0]
+      }
+      ,
+      {
+        name: 'Microwave oven',
+        color: '#003c8f',
+        data: [1.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0]
+      },
+      {
+        name: 'Electric car',
+        color: '#FF5722',
+        data: [0, 0, 0, 0, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      {
+        name: 'Lights',
+        color: '#2196F3',
+        data: [0.5, 0, 0, 0, 0, 0.5, 0.5, 0.5, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+      },
+      {
+        name: 'Refrigerator',
+        color: '#00BCD4',
+        data: [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8]
+      },
+      {
+        name: 'WiFi Router',
+        color: '#673AB7',
+        data: [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+      }
+    ]
   });
 </script>
 </body>
